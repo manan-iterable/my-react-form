@@ -1,11 +1,13 @@
 // src/FormComponent.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const FormComponent = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: ''
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,8 +19,10 @@ const FormComponent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form data submitted:', formData);
+    // Save form data to session storage
+    sessionStorage.setItem('formData', JSON.stringify(formData));
+    // Redirect to success page
+    navigate('/success');
   };
 
   return (
